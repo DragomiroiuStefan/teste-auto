@@ -19,12 +19,12 @@ public class TestRepository {
     @Autowired
     DSLContext context;
 
-    public int saveTest(Integer userId, String category, Duration timeSpent) {
+    public int saveTest(Integer userId, String category, String timeSpent) {
         var testsRecord = new UserTestsRecord();
         testsRecord.setUserId(userId);
         testsRecord.setCategoryId(category);
         testsRecord.setEndTime(LocalDateTime.now());
-        testsRecord.setTimeSpent(YearToSecond.valueOf(timeSpent));
+        testsRecord.setTimeSpent(timeSpent);
         return context.insertInto(USER_TESTS)
                 .set(testsRecord)
                 .returning(USER_TESTS.USER_TEST_ID)

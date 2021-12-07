@@ -3,6 +3,7 @@ package com.stefan.testeauto.controller;
 import com.stefan.testeauto.dto.UserTestAnswersDto;
 import com.stefan.testeauto.dto.UserTestDto;
 import com.stefan.testeauto.repository.UserRepository;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
@@ -10,6 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
+@CrossOrigin("http://localhost:3000")
 public class UserController {
 
     private final UserRepository userRepository;

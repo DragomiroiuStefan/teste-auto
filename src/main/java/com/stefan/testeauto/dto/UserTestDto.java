@@ -9,7 +9,7 @@ public class UserTestDto {
     private Integer userTestId;
     private String categoryId;
     private LocalDateTime endTime;
-    private YearToSecond timeSpent;
+    private String timeSpent;
     private Integer answers;
     private Short total;
 
@@ -37,11 +37,11 @@ public class UserTestDto {
         this.endTime = endTime;
     }
 
-    public YearToSecond getTimeSpent() {
+    public String getTimeSpent() {
         return timeSpent;
     }
 
-    public void setTimeSpent(YearToSecond timeSpent) {
+    public void setTimeSpent(String timeSpent) {
         this.timeSpent = timeSpent;
     }
 

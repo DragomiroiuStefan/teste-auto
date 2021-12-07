@@ -36,7 +36,7 @@ public class TestService {
         int testId = testRepository.saveTest(
                 userTestRequest.getUserId(),
                 userTestRequest.getCategory(),
-                DateUtil.getDuration(userTestRequest.getTimeSpent())
+                userTestRequest.getTimeSpent()
         );
         for (var testAnswer: userTestRequest.getTestAnswers()){
             testRepository.saveTestAnswers(

@@ -17,7 +17,7 @@ CREATE TABLE users (
 
 CREATE TABLE category (
 	category_id VARCHAR ( 2 ) PRIMARY KEY,
-	test_time interval not null,
+	test_time VARCHAR ( 5 ) not null,
 	no_of_questions smallint not null
 );
 
@@ -40,7 +40,7 @@ CREATE TABLE user_tests (
 	user_id int references users(user_id), 
 	category_id varchar ( 2 ) references category(category_id), 
 	end_time timestamp NOT NULL,
-	time_spent interval NOT NULL
+	time_spent VARCHAR ( 5 ) NOT NULL
 );
 
 CREATE TABLE user_test_answers (
@@ -55,12 +55,12 @@ insert into users values
 (default, 'test', 'user', 'user@mail.com', 'user', NOW());
 
 insert into category values
-('A', '20m', 20),
-('AM', '20m', 20),
-('A1', '20m', 20),
-('A2', '20m', 20),
-('B', '30m', 26),
-('C', '30m', 26);
+('A', '20:00', 20),
+('AM', '20:00', 20),
+('A1', '20:00', 20),
+('A2', '20:00', 20),
+('B', '30:00', 26),
+('C', '30:00', 26);
 
 
 insert into questions  values

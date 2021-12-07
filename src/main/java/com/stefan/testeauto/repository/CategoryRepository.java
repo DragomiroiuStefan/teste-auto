@@ -5,6 +5,8 @@ import org.jooq.DSLContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 import static com.stefan.model.Tables.CATEGORY;
 
 @Repository
@@ -17,6 +19,11 @@ public class CategoryRepository {
         return context. selectFrom(CATEGORY)
                 .where(CATEGORY.CATEGORY_ID.eq(categoryId))
                 .fetchOneInto(Category.class);
+    }
+
+    public List<Category> getCategories() {
+        return context. selectFrom(CATEGORY)
+                .fetchInto(Category.class);
     }
 
 }

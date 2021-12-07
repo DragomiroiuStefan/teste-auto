@@ -11,6 +11,7 @@ import org.springframework.web.server.ResponseStatusException;
 import java.util.List;
 
 @RestController
+@CrossOrigin("http://localhost:3000")
 public class TestController {
 
     private final TestService testService;
