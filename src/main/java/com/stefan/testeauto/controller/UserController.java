@@ -1,24 +1,49 @@
 package com.stefan.testeauto.controller;
 
+import com.stefan.model.tables.pojos.Users;
 import com.stefan.testeauto.dto.UserTestAnswersDto;
 import com.stefan.testeauto.dto.UserTestDto;
 import com.stefan.testeauto.repository.UserRepository;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
+import com.stefan.testeauto.service.AuthService;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 
+import javax.servlet.http.HttpServletResponse;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @CrossOrigin("http://localhost:3000")
 public class UserController {
 
     private final UserRepository userRepository;
+    private final AuthService authService;
 
-
-    public UserController(UserRepository userRepository) {
+    public UserController(UserRepository userRepository, AuthService authService) {
         this.userRepository = userRepository;
+        this.authService = authService;
+    }
+
+    @PostMapping("/users/login")
+    public Users login(@RequestBody Users user, HttpServletResponse response) {
+        Optional<Users> userRecord = userRepository.getUserByEmail(user.getEmail());
+        if (userRecord.isEmpty() ||  !user.getPassword().equals(userRecord.get().getPassword())) {
+            throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "bad credentials");
+        }
+        userRepository.updateLastLogin(user.getEmail());
+        String jwt = authService.createJWT(user.getEmail());
+        response.addHeader("Authorization", "Bearer: " + jwt);
+        response.addHeader("Access-Control-Expose-Headers", "Authorization");
+        return userRecord.get();
+    }
+
+    @PostMapping("/users/register")
+    public Users register(@RequestBody Users user, HttpServletResponse response) {
+        String jwt = authService.createJWT(user.getEmail());
+        response.addHeader("Authorization", "Bearer: " + jwt);
+        response.addHeader("Access-Control-Expose-Headers", "Authorization");
+        return userRepository.save(user);
     }
 
     @GetMapping("/users/{userId}/tests")

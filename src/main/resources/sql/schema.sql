@@ -11,7 +11,7 @@ CREATE TABLE users (
 	last_name VARCHAR ( 50 ) NOT NULL,
 	email VARCHAR ( 255 ) UNIQUE NOT NULL,
 	password VARCHAR ( 50 ) NOT NULL,
-	created_on TIMESTAMP NOT NULL,
+	created_on TIMESTAMP default NOW(),
     last_login TIMESTAMP 
 );
 
@@ -51,8 +51,7 @@ CREATE TABLE user_test_answers (
 );
 
 insert into users values
-(default, 'Stefan', 'Dragomiroiu', 'stefandragomiroiu@mail.com', 'stefan', NOW()),
-(default, 'test', 'user', 'user@mail.com', 'user', NOW());
+(default, 'Stefan', 'Dragomiroiu', 'stefandragomiroiu@mail.com', 'stefan');
 
 insert into category values
 ('A', '20:00', 20),

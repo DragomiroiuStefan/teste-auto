@@ -3,11 +3,9 @@ package com.stefan.testeauto.repository;
 import com.stefan.model.tables.records.UserTestAnswersRecord;
 import com.stefan.model.tables.records.UserTestsRecord;
 import org.jooq.DSLContext;
-import org.jooq.types.YearToSecond;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import java.time.Duration;
 import java.time.LocalDateTime;
 
 import static com.stefan.model.Tables.USER_TESTS;
